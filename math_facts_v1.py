@@ -19,6 +19,7 @@ def must_get_an_integer_input():
     return integer_or_none
 
 how_many_times=50
+how_many_retrys=3
 
 right=0
 for i in range(1,how_many_times+1):
@@ -26,10 +27,15 @@ for i in range(1,how_many_times+1):
     no_2=random.randint(3,3)
     real_answer=no_1*no_2
     print("Question {}: {}x{}=?".format(i,no_1,no_2))
-    answer=must_get_an_integer_input()
-    if(answer==real_answer):
-        print("*^-^*correct*^-^*")
-        right=right+1
-    else:
-        print("\tNo it should be {}".format(real_answer))
+    for j in range(1,how_many_retrys+1):
+        answer=must_get_an_integer_input()
+        if(answer==real_answer):
+            print("*^-^*correct*^-^*")
+            right=right+1
+            break
+        else:
+            if(j==how_many_retrys):
+                print("\tNo it should be {}".format(real_answer))
+            else:
+                print("\tWrong, try again.")
 print("you got {} / {}".format(right,how_many_times))
